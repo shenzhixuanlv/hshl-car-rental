@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>山东华商汇理科技 | 高端汽车租赁服务</title>
+    <meta name="description" content="山东华商汇理科技 - 专业汽车租赁服务领导者。">
+    <!-- 预连接外部资源 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <!-- 字体加载优化 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #c9a227;
+            --primary-dark: #a68520;
+            --bg-light: #f8f8f8;
+            --bg-white: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+            --border: #e5e5e5;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Noto Sans SC', sans-serif; background: var(--bg-light); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+        
+        /* ====== 炫酷效果 ====== */
+        
+        /* 1. 鼠标跟随光效 */
+        .cursor-light { position: fixed; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(201,162,39,0.15) 0%, rgba(201,162,39,0.04) 40%, transparent 70%); pointer-events: none; z-index: 1; transform: translate(-50%, -50%); transition: opacity 0.4s; opacity: 0; }
+        .cursor-light.active { opacity: 1; }
+        
+        /* 2. 视差滚动背景 */
+        .parallax-bg { position: absolute; inset: 0; background: url('cars-01-passat.jpg') center/cover; opacity: 0.25; will-change: transform; }
+        
+        /* 3. 数字滚动动画 */
+        .counter { display: inline-block; }
+        .counter.animated { }
+        
+        /* 4. 增强滚动渐显 - 交错动画 */
+        .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .fade-in.delay-1 { transition-delay: 0.1s; }
+        .fade-in.delay-2 { transition-delay: 0.2s; }
+        .fade-in.delay-3 { transition-delay: 0.3s; }
+        .fade-in.delay-4 { transition-delay: 0.4s; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 80px 0; }
+        .text-center { text-align: center; }
+        
+        /* Header */
+        .header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary) 0%, #e8c547 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #fff; font-size: 16px; }
+        .logo-text { font-size: 18px; font-weight: 500; color: var(--text-primary); }
+        .nav { display: flex; gap: 30px; }
+        .nav a { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .nav a:hover { color: var(--primary); }
+        .header-phone { color: var(--primary); font-size: 14px; font-weight: 500; }
+        
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); padding: 150px 0 100px; position: relative; overflow: hidden; }
+        .hero::before { content:''; position:absolute; inset:0; background: url('cars-01-passat.jpg') center/cover; opacity: 0.25; }
+        .hero::after { content:''; position:absolute; inset:0; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6)); }
+        .hero-content { position: relative; z-index: 1; text-align: center; }
+        .hero h1 { color: #fff; font-size: 52px; margin-bottom: 20px; animation: fadeInUp 0.8s ease; }
+        .hero h1 span { color: var(--primary); }
+        .hero-subtitle { color: rgba(255,255,255,0.85); font-size: 20px; margin-bottom: 40px; animation: fadeInUp 0.8s ease 0.2s both; }
+        
+        /* About Section in Hero */
+        .hero-about { background: var(--bg-white); border-radius: 16px; padding: 40px; max-width: 900px; margin: 0 auto; box-shadow: var(--shadow-md); animation: fadeInUp 0.8s ease 0.4s both; }
+        .hero-about h2 { font-size: 24px; margin-bottom: 15px; color: var(--text-primary); }
+        .hero-about p { color: var(--text-secondary); font-size: 15px; line-height: 1.8; margin-bottom: 25px; }
+        .about-stats { display: flex; justify-content: center; gap: 60px; }
+        .about-stat { text-align: center; }
+        .about-stat-num { font-size: 36px; font-weight: 700; color: var(--primary); }
+        .about-stat-label { font-size: 14px; color: var(--text-muted); }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Hot Cars */
+        .hot-cars { background: var(--bg-white); padding: 80px 0; }
+        .section-header { margin-bottom: 50px; }
+        .section-header h2 { font-size: 32px; margin-bottom: 12px; }
+        .section-header p { color: var(--text-secondary); font-size: 15px; }
+        .cars-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        .car-card { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
+        .car-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .car-img { height: 150px; background: #f5f5f5; overflow: hidden; position: relative; }
+        .car-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .car-card:hover .car-img img { transform: scale(1.1); }
+        .car-info { padding: 18px; }
+        .car-name { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+        .car-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+        .car-rating { display: flex; align-items: center; gap: 3px; }
+        .car-rating i { color: #ffc107; font-size: 12px; }
+        .car-rating span { font-size: 12px; color: var(--text-muted); margin-left: 5px; }
+        .car-price { margin-top: 10px; font-size: 18px; font-weight: 600; color: var(--primary); }
+        .car-price span { font-size: 12px; font-weight: 400; color: var(--text-muted); }
+        
+        /* Service Advantages */
+        .advantages { background: var(--bg-light); padding: 80px 0; position: relative; overflow: hidden; }
+        .advantages::before { content:''; position:absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(201,162,39,0.1) 0%, transparent 70%); top: -100px; right: -100px; }
+        .advantage-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 50px; }
+        .advantage-item { text-align: center; padding: 40px 25px; background: var(--bg-white); border-radius: 16px; transition: all 0.3s; position: relative; overflow: hidden; }
+        .advantage-item::before { content:''; position:absolute; top:0; left:0; right:0; height: 3px; background: linear-gradient(90deg, var(--primary), #e8c547); transform: scaleX(0); transition: transform 0.3s; }
+        .advantage-item:hover::before { transform: scaleX(1); }
+        .advantage-item:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); }
+        .advantage-icon { width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary) 0%, #e8c547 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; transition: transform 0.3s; }
+        .advantage-item:hover .advantage-icon { transform: scale(1.1); }
+        .advantage-icon i { font-size: 32px; color: #fff; }
+        .advantage-item h3 { font-size: 20px; margin-bottom: 12px; }
+        .advantage-item p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+        
+        /* Services Section */
+        .services { background: var(--bg-white); padding: 80px 0; }
+        .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; margin-top: 50px; }
+        .service-box { text-align: center; padding: 40px 25px; border: 1px solid var(--border); border-radius: 16px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
+        .service-box::after { content:''; position:absolute; inset:0; background: linear-gradient(135deg, var(--primary), #e8c547); opacity: 0; transition: opacity 0.3s; }
+        .service-box:hover { border-color: var(--primary); transform: translateY(-8px); box-shadow: 0 20px 40px rgba(201,162,39,0.2); }
+        .service-box:hover::after { opacity: 0.05; }
+        .service-box i { font-size: 48px; color: var(--primary); margin-bottom: 20px; transition: transform 0.3s; }
+        .service-box:hover i { transform: scale(1.2); }
+        .service-box h3 { font-size: 20px; margin-bottom: 12px; position: relative; z-index: 1; }
+        .service-box p { font-size: 14px; color: var(--text-secondary); position: relative; z-index: 1; }
+        
+        /* Fleet */
+        .fleet { background: var(--bg-light); padding: 80px 0; }
+        .fleet-categories { display: flex; justify-content: center; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; }
+        .fleet-tab { padding: 12px 28px; background: var(--bg-white); border: 1px solid var(--border); border-radius: 30px; color: var(--text-secondary); font-size: 14px; cursor: pointer; transition: all 0.3s; }
+        .fleet-tab:hover, .fleet-tab.active { background: linear-gradient(135deg, var(--primary), #e8c547); color: #fff; border-color: var(--primary); }
+        
+        /* 车队规模概览 */
+        .fleet-overview { margin-bottom: 50px; }
+        .fleet-overview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; }
+        .fleet-overview-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 35px 20px; text-align: center; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .fleet-overview-card:hover { border-color: var(--primary); transform: translateY(-8px); box-shadow: 0 20px 40px rgba(201,162,39,0.2); }
+        .fleet-overview-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), #e8c547); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; font-size: 24px; color: #fff; }
+        .fleet-overview-num { font-size: 36px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+        .fleet-overview-label { font-size: 14px; color: var(--text-secondary); }
+        
+        .fleet-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 40px; }
+        .fleet-card { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 16/11; cursor: pointer; }
+        .fleet-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .fleet-card:hover img { transform: scale(1.15); }
+        .fleet-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 40%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 25px; transition: background 0.3s; }
+        .fleet-card:hover .fleet-overlay { background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 60%, transparent 100%); }
+        .fleet-badge { position: absolute; top: 18px; left: 18px; background: linear-gradient(135deg, var(--primary), #e8c547); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+        .fleet-card h3 { color: #fff; font-size: 24px; margin-bottom: 8px; }
+        .fleet-card p { color: rgba(255,255,255,0.85); font-size: 14px; }
+        .fleet-price { position: absolute; top: 18px; right: 18px; background: rgba(0,0,0,0.6); color: #fff; padding: 8px 16px; border-radius: 8px; font-size: 16px; font-weight: 600; }
+        .fleet-card:hover .fleet-price { background: var(--primary); }
+        
+        /* Contact */
+        .contact { background: var(--bg-white); padding: 80px 0; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .contact-info h2 { font-size: 32px; margin-bottom: 20px; }
+        .contact-info > p { color: var(--text-secondary); font-size: 15px; margin-bottom: 35px; line-height: 1.8; }
+        .contact-list { display: flex; flex-direction: column; gap: 25px; }
+        .contact-item { display: flex; align-items: center; gap: 18px; }
+        .contact-item i { width: 55px; height: 55px; background: linear-gradient(135deg, var(--primary), #e8c547); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #fff; }
+        .contact-item h4 { font-size: 16px; margin-bottom: 4px; }
+        .contact-item p { font-size: 14px; color: var(--text-secondary); }
+        .contact-image { border-radius: 16px; overflow: hidden; height: 400px; }
+        .contact-image img { width: 100%; height: 100%; object-fit: cover; }
+        .contact-map { border-radius: 16px; overflow: hidden; height: 400px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+        .map-link { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; color: #fff; text-decoration: none; transition: all 0.3s; }
+        .map-link:hover { background: linear-gradient(135deg, var(--primary), #e8c547); }
+        .map-link i { font-size: 64px; margin-bottom: 20px; color: var(--primary); }
+        .map-link:hover i { color: #fff; }
+        .map-link span { font-size: 20px; font-weight: 500; }
+        
+        /* Footer */
+        .footer { background: #1a1a1a; color: #fff; padding: 60px 0 25px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 40px; }
+        .footer h4 { font-size: 18px; margin-bottom: 20px; color: var(--primary); }
+        .footer-desc { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.8; }
+        .footer-links { display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: all 0.2s; }
+        .footer-links a:hover { color: var(--primary); transform: translateX(5px); }
+        .footer-bottom { text-align: center; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 13px; color: rgba(255,255,255,0.5); }
+        
+        /* Float Contact */
+        .float-contact { position: fixed; right: 25px; bottom: 25px; z-index: 99; display: flex; flex-direction: column; gap: 12px; }
+        .float-btn { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.2); transition: all 0.3s; }
+        .float-btn:hover { transform: scale(1.15); }
+        .float-btn.phone { background: linear-gradient(135deg, var(--primary), #e8c547); color: #fff; }
+        .float-btn.wechat { background: #07c160; color: #fff; }
+        
+        /* Scroll Animation */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        
+        @media (max-width: 992px) {
+            .cars-grid { grid-template-columns: repeat(3, 1fr); }
+            .advantage-grid { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .fleet-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .about-stats { flex-wrap: wrap; gap: 30px; }
+            .cars-grid { grid-template-columns: repeat(2, 1fr); }
+            .advantage-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
+            .fleet-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 鼠标跟随光效 -->
+    <div class="cursor-light" id="cursorLight"></div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="#" class="logo">
+                    <img src="202.jpg" alt="LOGO" width="40" height="40" style="height:40px;margin-right:10px;">
+                    <span class="logo-text">山东华商汇理科技</span>
+                </a>
+                <nav class="nav">
+                    <a href="#">首页</a>
+                    <a href="#services">服务项目</a>
+                    <a href="#fleet">车型展示</a>
+                    <a href="#about">关于我们</a>
+                    <a href="#contact">联系我们</a>
+                </nav>
+                <div class="header-phone"><i class="fas fa-phone-alt"></i> 130 1265 1120</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero with About -->
+<section class="hero">
+        <!-- 视差滚动背景 -->
+        <div class="parallax-bg" id="parallaxBg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <img src="202.jpg" alt="LOGO" width="500" height="375" style="width:500px;max-width:90%;height:auto;margin-bottom:30px;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                <h1 style="font-size:42px;margin-bottom:15px;">自由出发 <span>自在出行</span></h1>
+                <p class="hero-subtitle">专业租车服务，让我们畅享每一次旅程</p>
+                
+                <div class="hero-about" id="about">
+                    <h2>关于山东华商汇理科技</h2>
+                    <p>山东华商汇理科技有限公司成立于2025年，专注于汽车租赁服务行业，致力于为客户提供高品质的出行解决方案。我们拥有覆盖山东15+城市的租车服务网络，为数千家企业客户提供专业服务。</p>
+<div class="about-stats">
+                        <div class="about-stat">
+                            <div class="about-stat-num"><span class="counter" data-count="5000" data-suffix="+">0</span></div>
+                            <div class="about-stat-label">企业客户</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-num"><span class="counter" data-count="50" data-suffix="万+">0</span></div>
+                            <div class="about-stat-label">服务人次</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-num"><span class="counter" data-count="500" data-suffix="+">0</span></div>
+                            <div class="about-stat-label">运营车辆</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-num"><span class="counter" data-count="15" data-suffix="+">0</span></div>
+                            <div class="about-stat-label">覆盖城市</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hot Cars -->
+    <section class="hot-cars">
+        <div class="container">
+            <div class="section-header text-center fade-in">
+                <h2>热门车型推荐</h2>
+                <p>精选最受客户好评的热门车型</p>
+            </div>
+            <div class="cars-grid">
+                <div class="car-card fade-in">
+                    <div class="car-img"><img loading="lazy" src="cars-01-passat.jpg" alt="大众帕萨特" width="300" height="150"></div>
+                    <div class="car-info">
+                        <div class="car-name">大众帕萨特</div>
+                        <div class="car-desc">1.4T自动 | 三厢5座</div>
+                        <div class="car-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                        <div class="car-price">¥268<span>/天起</span></div>
+                    </div>
+                </div>
+                <div class="car-card fade-in">
+                    <div class="car-img"><img loading="lazy" src="cars-02-a6l.jpg" alt="奥迪A6L" width="300" height="150"></div>
+                    <div class="car-info">
+                        <div class="car-name">奥迪A6L</div>
+                        <div class="car-desc">2.0T自动 | 三厢5座</div>
+                        <div class="car-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span>
+                        </div>
+                        <div class="car-price">¥598<span>/天起</span></div>
+                    </div>
+                </div>
+                <div class="car-card fade-in">
+                    <div class="car-img"><img loading="lazy" src="cars-03-lixiangl8.jpg" alt="理想L8" width="300" height="150"></div>
+                    <div class="car-info">
+                        <div class="car-name">理想L8</div>
+                        <div class="car-desc">增程式 | SUV 6座</div>
+                        <div class="car-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.8</span>
+                        </div>
+                        <div class="car-price">¥458<span>/天起</span></div>
+                    </div>
+                </div>
+                <div class="car-card fade-in">
+                    <div class="car-img"><img loading="lazy" src="cars-04-gl8.jpg" alt="别克GL8" width="300" height="150"></div>
+                    <div class="car-info">
+                        <div class="car-name">别克GL8</div>
+                        <div class="car-desc">2.0T自动 | MPV 7座</div>
+                        <div class="car-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span>
+                        </div>
+                        <div class="car-price">¥428<span>/天起</span></div>
+                    </div>
+                </div>
+                <div class="car-card fade-in">
+                    <div class="car-img"><img loading="lazy" src="cars-05-tank300.jpg" alt="坦克300" width="300" height="150"></div>
+                    <div class="car-info">
+                        <div class="car-name">坦克300</div>
+                        <div class="car-desc">2.0T自动 | 越野5座</div>
+                        <div class="car-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.7</span>
+                        </div>
+                        <div class="car-price">¥328<span>/天起</span></div>
+                    </div>
+                </div>
+                <div class="car-card fade-in">
+                    <div class="car-img"><img loading="lazy" src="cars-06-bmw5.jpg" alt="宝马5系" width="300" height="150"></div>
+                    <div class="car-info">
+                        <div class="car-name">宝马5系</div>
+                        <div class="car-desc">2.0T自动 | 三厢5座</div>
+                        <div class="car-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span>
+                        </div>
+                        <div class="car-price">¥528<span>/天起</span></div>
+                    </div>
+                </div>
+                <div class="car-card fade-in">
+                    <div class="car-img"><img loading="lazy" src="cars-07-benz.jpg" alt="奔驰E级" width="300" height="150"></div>
+                    <div class="car-info">
+                        <div class="car-name">奔驰E级</div>
+                        <div class="car-desc">2.0T自动 | 三厢5座</div>
+                        <div class="car-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span>
+                        </div>
+                        <div class="car-price">¥588<span>/天起</span></div>
+                    </div>
+                </div>
+                <div class="car-card fade-in">
+                    <div class="car-img"><img loading="lazy" src="cars-08-bydhan.jpg" alt="比亚迪汉" width="300" height="150"></div>
+                    <div class="car-info">
+                        <div class="car-name">比亚迪汉</div>
+                        <div class="car-desc">EV | 中大型轿车</div>
+                        <div class="car-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.6</span>
+                        </div>
+                        <div class="car-price">¥238<span>/天起</span></div>
+                    </div>
+                </div>
+                <div class="car-card fade-in">
+                    <div class="car-img"><img loading="lazy" src="cars-09-xpengp7.jpg" alt="小鹏P7" width="300" height="150"></div>
+                    <div class="car-info">
+                        <div class="car-name">小鹏P7</div>
+                        <div class="car-desc">EV | 智能轿跑</div>
+                        <div class="car-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.7</span>
+                        </div>
+                        <div class="car-price">¥268<span>/天起</span></div>
+                    </div>
+                </div>
+                <div class="car-card fade-in">
+                    <div class="car-img"><img loading="lazy" src="cars-10-alpha.jpg" alt="埃尔法" width="300" height="150"></div>
+                    <div class="car-info">
+                        <div class="car-name">埃尔法</div>
+                        <div class="car-desc">2.5L混动 | MPV 7座</div>
+                        <div class="car-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                        <div class="car-price">¥1288<span>/天起</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Advantages -->
+    <section class="advantages">
+        <div class="container">
+            <div class="section-header text-center fade-in">
+                <h2>我们的优势</h2>
+                <p>全程为您提供安全、便捷的租车服务</p>
+            </div>
+            <div class="advantage-grid">
+                <div class="advantage-item fade-in">
+                    <div class="advantage-icon"><i class="fas fa-headset"></i></div>
+                    <h3>7×24小时客服</h3>
+                    <p>预订-取车-用车-还车，全程为您提供所需帮助</p>
+                </div>
+                <div class="advantage-item fade-in">
+                    <div class="advantage-icon"><i class="fas fa-credit-card"></i></div>
+                    <h3>信用免押租车</h3>
+                    <p>芝麻分满550分，有机会享免押金租车</p>
+                </div>
+                <div class="advantage-item fade-in">
+                    <div class="advantage-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3>支持自助取还</h3>
+                    <p>全市多个自助取还点，用手机即可完成取还车</p>
+                </div>
+                <div class="advantage-item fade-in">
+                    <div class="advantage-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>全程安全保障</h3>
+                    <p>多种保障方案保障您的出行安全</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header text-center fade-in">
+                <h2>服务项目</h2>
+                <p>专业方案，定制服务</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-box fade-in">
+                    <i class="fas fa-car"></i>
+                    <h3>个人租车</h3>
+                    <p>日租/月租/长租灵活选择</p>
+                </div>
+                <div class="service-box fade-in">
+                    <i class="fas fa-building"></i>
+                    <h3>企业租车</h3>
+                    <p>公务用车/员工通勤/长短期方案</p>
+                </div>
+                <div class="service-box fade-in">
+                    <i class="fas fa-users"></i>
+                    <h3>团体接送</h3>
+                    <p>会议/婚庆/旅游/大型活动</p>
+                </div>
+                <div class="service-box fade-in">
+                    <i class="fas fa-plane-departure"></i>
+                    <h3>机场接送</h3>
+                    <p>专车接送/准时准点/专业司机</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fleet -->
+    <section class="fleet" id="fleet">
+        <div class="container">
+            <div class="section-header text-center fade-in">
+                <h2>车队展示</h2>
+                <p>规模领先，车型丰富，满足各类出行需求</p>
+            </div>
+            
+            <!-- 车队规模概览 -->
+            <div class="fleet-overview fade-in">
+                <div class="fleet-overview-grid">
+                    <div class="fleet-overview-card">
+                        <div class="fleet-overview-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="fleet-overview-num">200+</div>
+                        <div class="fleet-overview-label">运营车辆</div>
+                    </div>
+                    <div class="fleet-overview-card">
+                        <div class="fleet-overview-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="fleet-overview-num">15+</div>
+                        <div class="fleet-overview-label">覆盖城市</div>
+                    </div>
+                    <div class="fleet-overview-card">
+                        <div class="fleet-overview-icon">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <div class="fleet-overview-num">50+</div>
+                        <div class="fleet-overview-label">车型种类</div>
+                    </div>
+                    <div class="fleet-overview-card">
+                        <div class="fleet-overview-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="fleet-overview-num">100万+</div>
+                        <div class="fleet-overview-label">服务人次</div>
+                    </div>
+                    <div class="fleet-overview-card">
+                        <div class="fleet-overview-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="fleet-overview-num">100%</div>
+                        <div class="fleet-overview-label">保险保障</div>
+                    </div>
+                    <div class="fleet-overview-card">
+                        <div class="fleet-overview-icon">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <div class="fleet-overview-num">150+</div>
+                        <div class="fleet-overview-label">专业司机</div>
+                    </div>
+                    <div class="fleet-overview-card">
+                        <div class="fleet-overview-icon">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <div class="fleet-overview-num">20+</div>
+                        <div class="fleet-overview-label">维修网点</div>
+                    </div>
+                    <div class="fleet-overview-card">
+                        <div class="fleet-overview-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="fleet-overview-num">5000+</div>
+                        <div class="fleet-overview-label">合作企业</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h2>联系我们</h2>
+                    <p>有任何租车需求，欢迎随时联系我们。我们的专业团队将为您提供全方位的咨询服务。</p>
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h4>咨询热线</h4>
+                                <p>130 1265 1120</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>公司地址</h4>
+                                <p>山东省济南市高新区舜华路街道龙奥北路1577号龙奥天街广场1号楼415A1</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>邮箱</h4>
+                                <p>service@huashanghuili.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map fade-in">
+                    <iframe 
+                        src="https://www.openstreetmap.org/export/embed.html?bbox=117.092,36.662,117.132,36.702&layer=mapnik&marker=36.682,117.112"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; border-radius: 16px;" 
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>山东华商汇理科技有限公司</h4>
+                    <p class="footer-desc">专业汽车租赁服务提供商，为您提供个人租车、企业租车、团体接送、机场接送等全方位服务。</p>
+                </div>
+                <div>
+                    <h4>租车服务</h4>
+                    <div class="footer-links">
+                        <a href="#">个人租车</a>
+                        <a href="#">企业租车</a>
+                        <a href="#">团体接送</a>
+                        <a href="#">机场接送</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>关于我们</h4>
+                    <div class="footer-links">
+                        <a href="#">公司介绍</a>
+                        <a href="#">联系我们</a>
+                        <a href="#">加入我们</a>
+                        <a href="#">新闻动态</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>关注我们</h4>
+                    <div class="footer-links">
+                        <a href="#"><i class="fab fa-weixin"></i> 微信公众号</a>
+                        <a href="#"><i class="fas fa-mobile-alt"></i> 手机App</a>
+                        <a href="#"><i class="fab fa-weibo"></i> 官方微博</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2024 山东华商汇理科技有限公司 版权所有 | 鲁ICP备XXXXXXXX号
+            </div>
+        </div>
+    </footer>
+
+    <!-- Float Contact -->
+    <div class="float-contact">
+        <a href="tel:130 1265 1120" class="float-btn phone"><i class="fas fa-phone"></i></a>
+        <a href="#" class="float-btn wechat"><i class="fab fa-weixin"></i></a>
+    </div>
+
+<script>
+        // ====== 炫酷效果 JavaScript ======
+        
+        // 1. 鼠标跟随光效
+        const cursorLight = document.getElementById('cursorLight');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorLight.classList.add('active');
+        });
+        
+        // 平滑跟随
+        function updateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            cursorLight.style.left = cursorX + 'px';
+            cursorLight.style.top = cursorY + 'px';
+            requestAnimationFrame(updateCursor);
+        }
+        updateCursor();
+        
+        // 2. 视差滚动效果
+        const parallaxBg = document.getElementById('parallaxBg');
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            if (parallaxBg) {
+                parallaxBg.style.transform = `translateY(${scrolled * 0.4}px)`;
+            }
+        });
+        
+        // 3. 数字滚动动画
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    if (counter.classList.contains('animated')) return;
+                    
+                    const target = parseInt(counter.dataset.count);
+                    const suffix = counter.dataset.suffix || '+';
+                    const duration = 2000;
+                    const start = 0;
+                    const startTime = performance.now();
+                    
+                    function updateCounter(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const easeOut = 1 - Math.pow(1 - progress, 3);
+                        const current = Math.floor(start + (target - start) * easeOut);
+                        counter.textContent = current + suffix;
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.classList.add('animated');
+                        }
+                    }
+                    
+                    requestAnimationFrame(updateCounter);
+                    counter.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        document.querySelectorAll('.counter').forEach(counter => {
+            counterObserver.observe(counter);
+        });
+        
+        // 4. 滚动渐显动画
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        // 车队标签切换
+        document.querySelectorAll('.fleet-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.fleet-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
