@@ -197,9 +197,16 @@
         .float-btn.phone { background: linear-gradient(135deg, var(--primary), #e8c547); color: #fff; }
         .float-btn.wechat { background: #07c160; color: #fff; }
         
+        /* Mobile Menu Button */
+        .mobile-menu-btn { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; }
+        .mobile-menu-btn i { font-size: 24px; color: var(--text-primary); }
+        
         /* Scroll Animation */
         .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
+        
+        /* Case Card Hover */
+        .case-card:hover img { transform: scale(1.1); }
         
         @media (max-width: 992px) {
             .cars-grid { grid-template-columns: repeat(3, 1fr); }
@@ -219,6 +226,9 @@
             .contact-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
             .nav { display: none; }
+            .nav.active { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: #fff; padding: 20px; gap: 15px; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+            .mobile-menu-btn { display: flex; }
+            .cases-grid { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
@@ -241,6 +251,8 @@
                     <a href="#contact">联系我们</a>
                 </nav>
                 <div class="header-phone"><i class="fas fa-phone-alt"></i> 130 1265 1120</div>
+                <div class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
             </div>
         </div>
     </header>
@@ -517,6 +529,41 @@
         </div>
     </section>
 
+    <!-- Success Cases -->
+    <section class="success-cases" id="cases" style="background: var(--bg-light); padding: 80px 0;">
+        <div class="container">
+            <div class="section-header text-center fade-in">
+                <h2>成功案例</h2>
+                <p>服务超过5000家企业客户，值得信赖的选择</p>
+            </div>
+            <div class="cases-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-top: 50px;">
+                <div class="case-card fade-in" style="border-radius: 16px; overflow: hidden; aspect-ratio: 16/11; position: relative; cursor: pointer;">
+                    <img src="cars-04-gl8.jpg" alt="企业年会团体接送" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 25px;">
+                        <span style="position: absolute; top: 18px; left: 18px; background: linear-gradient(135deg, var(--primary), #e8c547); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px;">企业用车</span>
+                        <h3 style="color: #fff; font-size: 22px; margin-bottom: 8px;">某大型企业年会团体接送</h3>
+                        <p style="color: rgba(255,255,255,0.85); font-size: 14px;">服务500人大型企业年会，提供50辆商务车队</p>
+                    </div>
+                </div>
+                <div class="case-card fade-in" style="border-radius: 16px; overflow: hidden; aspect-ratio: 16/11; position: relative; cursor: pointer;">
+                    <img src="cars-07-benz.jpg" alt="国际马拉松赛事接送" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 25px;">
+                        <span style="position: absolute; top: 18px; left: 18px; background: linear-gradient(135deg, var(--primary), #e8c547); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px;">赛事保障</span>
+                        <h3 style="color: #fff; font-size: 22px; margin-bottom: 8px;">国际马拉松赛事运动员接送</h3>
+                        <p style="color: rgba(255,255,255,0.85); font-size: 14px;">连续3年服务马拉松赛事，累计接送1000+运动员</p>
+                    </div>
+                </div>
+                <div class="case-card fade-in" style="border-radius: 16px; overflow: hidden; aspect-ratio: 16/11; position: relative; cursor: pointer;">
+                    <img src="cars-10-alpha.jpg" alt="婚庆车队服务" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%); display: flex; flex-direction: column; justify-content: flex-end; padding: 25px;">
+                        <span style="position: absolute; top: 18px; left: 18px; background: linear-gradient(135deg, var(--primary), #e8c547); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px;">婚庆服务</span>
+                        <h3 style="color: #fff; font-size: 22px; margin-bottom: 8px;">豪华婚庆车队服务</h3>
+                        <p style="color: rgba(255,255,255,0.85); font-size: 14px;">提供50辆豪华车队，专业的婚庆礼仪服务</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Fleet -->
     <section class="fleet" id="fleet">
         <div class="container">
@@ -671,7 +718,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                © 2024 山东华商汇理科技有限公司 版权所有 | 鲁ICP备XXXXXXXX号
+                © 2025 山东华商汇理科技有限公司 版权所有 | 鲁ICP备XXXXXXXX号
             </div>
         </div>
     </footer>
@@ -679,7 +726,7 @@
     <!-- Float Contact -->
     <div class="float-contact">
         <a href="tel:130 1265 1120" class="float-btn phone"><i class="fas fa-phone"></i></a>
-        <a href="#" class="float-btn wechat"><i class="fab fa-weixin"></i></a>
+        <a href="https://u.wechat.com/MLcJ63KJqizA0kEKqDL-S5c?s=2" class="float-btn wechat" target="_blank"><i class="fab fa-weixin"></i></a>
     </div>
 
 <script>
@@ -779,6 +826,31 @@
                 this.classList.add('active');
             });
         });
+        
+        // 移动端汉堡菜单
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const nav = document.querySelector('.nav');
+        if (mobileMenuBtn && nav) {
+            mobileMenuBtn.addEventListener('click', () => {
+                nav.classList.toggle('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (nav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            nav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    nav.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+        }
     </script>
 </body>
 </html>
